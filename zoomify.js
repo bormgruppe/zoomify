@@ -24,8 +24,9 @@ $.fn.zoomify = function(data, opt) {
 			totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
 		} while(currentElement = currentElement.offsetParent)
 
-        var px = event.pageX || event.changedTouches[0].pageX;
-        var py = event.pageY || event.changedTouches[0].pageY;
+        var coords = event_coords(event);
+        var px = coords[0];
+        var py = coords[1];
 
 		elementX = px - totalOffsetX;
 		elementY = py - totalOffsetY;
@@ -186,9 +187,9 @@ $.fn.zoomify = function(data, opt) {
 
 	function event_coords(e) {
 		var coords = [];
-		if (e.touches && e.touches.length) {
-			coords[0] = e.touches[0].clientX;
-			coords[1] = e.touches[0].clientY;
+		if (e.changedTouches && e.changedTouches.length) {
+			coords[0] = e.changedTouches[0].clientX;
+			coords[1] = e.changedTouches[0].clientY;
 		} else {
 			coords[0] = e.clientX;
 			coords[1] = e.clientY;
@@ -253,12 +254,9 @@ $.fn.zoomify = function(data, opt) {
 	}
 
     function image_click_event(e) {
-        if (e.changedTouches)
-            $('#dump').append(e.changedTouches.length);
-        var px = e.pageX || e.changedTouches[0].pageX;
-        var py = e.pageY || e.changedTouches[0].pageY;
-
-        $('#dump').append('CLICK: ' + px + ' / ' + py);
+        var coords = event_coords(e);
+        var px = coords[0];
+        var py = coords[1];
 
         if (started && Math.abs(startX - px) < 10 && Math.abs(startY - py) < 10) {
             var clickCoords = img_ref.relMouseCoords(e);
@@ -280,8 +278,9 @@ $.fn.zoomify = function(data, opt) {
 		e = e || window.event;
 
         if (!started) {
-            startX = e.pageX || e.changedTouches[0].pageX;
-            startY = e.pageY || e.changedTouches[0].pageY;
+            var coords = event_coords(e);
+            startX = coords[0];
+            startY = coords[1];
 
             started = true;
         }
@@ -308,7 +307,6 @@ $.fn.zoomify = function(data, opt) {
 		// http://www.quirksmode.org/blog/archives/2010/02/the_touch_actio.html
 		// http://www.quirksmode.org/m/tests/drag.html
 
-        $('#dump').append(e.type);
 		if (e.type === 'touchstart') {
 			img_ref.onmousedown = null;
 			img_ref.ontouchmove = image_move_event;
@@ -516,7 +514,15 @@ $.fn.zoomify = function(data, opt) {
 			var cx = coords.x * img_orig_width / img_zoom_width;
 			var cy = coords.y * img_orig_height / img_zoom_height;
 
-			self.trigger('info',  {absX: event.pageX, absY: event.pageY, relX: cx, relY: cy, data: data });
+            var coords = event_coords(event);
+
+			self.trigger('info', {
+                absX: coords[0],
+                absY: coords[1],
+                relX: cx,
+                relY: cy,
+                data: data
+            });
 		});
 	}
 };
