@@ -203,21 +203,52 @@ $.fn.zoomify = function(data, opt) {
 		//--------------------------------------------------
 		// Boundary check
 
-		var max_left = (div_half_width - img_zoom_width),
-			max_top = (div_half_height - img_zoom_height);
+		var max_left, max_top;
 
-		if (img_current_left > div_half_width) {
-			img_current_left = div_half_width;
-		}
-		if (img_current_top  > div_half_height) {
-			img_current_top  = div_half_height;
-		}
-		if (img_current_left < max_left) {
-			img_current_left = max_left;
-		}
-		if (img_current_top  < max_top) {
-			img_current_top  = max_top;
-		}
+        var border = 50;
+        if (opt && opt['border']) {
+            border = opt['border'];
+        }
+
+        if (img_zoom_width > div_width) {
+            max_left = div_width - border - img_zoom_width;
+
+            if (img_current_left > border) {
+                img_current_left = border;
+            }
+            if (img_current_left < max_left) {
+                img_current_left = max_left;
+            }
+        } else {
+            max_left = div_half_width - img_zoom_width;
+
+            if (img_current_left > div_half_width) {
+                img_current_left = div_half_width;
+            }
+            if (img_current_left < max_left) {
+                img_current_left = max_left;
+            }
+        }
+
+        if (img_zoom_height > div_height) {
+            max_top = div_height - border - img_zoom_height;
+
+            if (img_current_top > border) {
+                img_current_top = border;
+            }
+            if (img_current_top < max_top) {
+                img_current_top = max_top;
+            }
+        } else {
+            max_top = div_half_height - img_zoom_height;
+
+            if (img_current_top > div_half_height) {
+                img_current_top = div_half_height;
+            }
+            if (img_current_top < max_top) {
+                img_current_top = max_top;
+            }
+        }
 
 		//--------------------------------------------------
 		// Move
