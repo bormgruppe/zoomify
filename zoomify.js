@@ -148,6 +148,7 @@ $.fn.zoomify = function(data, opt) {
 		img_ref.style.left = img_current_left + 'px';
 		img_ref.style.top  = img_current_top + 'px';
 
+        image_move_update();
 	}
 
 	function image_zoom_in() {
@@ -179,7 +180,6 @@ $.fn.zoomify = function(data, opt) {
 		}
 
 		return false;
-
 	}
 
 	//--------------------------------------------------
@@ -197,7 +197,6 @@ $.fn.zoomify = function(data, opt) {
 		return coords;
 	}
 
-	// TODO: Constrict to width/height, not half width/height
 	function image_move_update() {
 
 		//--------------------------------------------------
@@ -281,7 +280,6 @@ $.fn.zoomify = function(data, opt) {
 		}
 
 		return false;
-
 	}
 
     function image_click_event(e) {
