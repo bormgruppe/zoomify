@@ -28,9 +28,9 @@ $.fn.zoomify = function(data, opt) {
         var px = coords[0];
         var py = coords[1];
 
-		elementX = px - totalOffsetX;
-		elementY = py - totalOffsetY;
-		
+		elementX = px - totalOffsetX + $(document).scrollLeft();
+		elementY = py - totalOffsetY + $(document).scrollTop();
+
 		return {
 			x: elementX,
 			y: elementY
@@ -538,16 +538,16 @@ $.fn.zoomify = function(data, opt) {
 
 		$(img_ref).on('mousemove', function(event) {
 			var self = $(this);
-			var coords = img_ref.relMouseCoords(event);
-			
-			var cx = coords.x * img_orig_width / img_zoom_width;
-			var cy = coords.y * img_orig_height / img_zoom_height;
+			var rel = img_ref.relMouseCoords(event);
 
-            var coords = event_coords(event);
+			var cx = rel.x * img_orig_width / img_zoom_width;
+			var cy = rel.y * img_orig_height / img_zoom_height;
+
+            var abs = event_coords(event);
 
 			self.trigger('info', {
-                absX: coords[0],
-                absY: coords[1],
+                absX: abs[0],
+                absY: abs[1],
                 relX: cx,
                 relY: cy,
                 data: data
