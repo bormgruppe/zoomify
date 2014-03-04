@@ -13,28 +13,13 @@ $.fn.zoomify = function(data, opt) {
 	"use strict";
 	
 	function relMouseCoords(event){
-		var totalOffsetX = 0;
-		var totalOffsetY = 0;
-		var elementX = 0;
-		var elementY = 0;
-		var currentElement = this;
-
-		do{
-			totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-			totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
-		} while(currentElement = currentElement.offsetParent)
-
         var coords = event_coords(event);
-        var px = coords[0];
-        var py = coords[1];
+        var target = $(event.target || event.srcElement);
 
-		elementX = px - totalOffsetX + $(document).scrollLeft();
-		elementY = py - totalOffsetY + $(document).scrollTop();
-
-		return {
-			x: elementX,
-			y: elementY
-		}
+        return {
+            x: coords[0] - target.offset().left,
+            y: coords[1] - target.offset().top
+        }
 	}
 	HTMLImageElement.prototype.relMouseCoords = relMouseCoords;
 
@@ -188,11 +173,17 @@ $.fn.zoomify = function(data, opt) {
 	function event_coords(e) {
 		var coords = [];
 		if (e.changedTouches && e.changedTouches.length) {
-			coords[0] = e.changedTouches[0].clientX;
-			coords[1] = e.changedTouches[0].clientY;
+			coords[0] = e.changedTouches[0].pageX;
+			coords[1] = e.changedTouches[0].pageY;
+
+            coords[2] = e.changedTouches[0].clientX;
+            coords[3] = e.changedTouches[0].clientY;
 		} else {
-			coords[0] = e.clientX;
-			coords[1] = e.clientY;
+			coords[0] = e.pageX;
+			coords[1] = e.pageY;
+
+            coords[2] = e.clientX;
+            coords[3] = e.clientY;
 		}
 		return coords;
 	}
@@ -546,8 +537,8 @@ $.fn.zoomify = function(data, opt) {
             var abs = event_coords(event);
 
 			self.trigger('info', {
-                absX: abs[0],
-                absY: abs[1],
+                absX: abs[2],
+                absY: abs[3],
                 relX: cx,
                 relY: cy,
                 data: data
