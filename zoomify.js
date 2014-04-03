@@ -175,15 +175,9 @@ $.fn.zoomify = function(data, opt) {
 		if (e.changedTouches && e.changedTouches.length) {
 			coords[0] = e.changedTouches[0].pageX;
 			coords[1] = e.changedTouches[0].pageY;
-
-            coords[2] = e.changedTouches[0].clientX;
-            coords[3] = e.changedTouches[0].clientY;
 		} else {
 			coords[0] = e.pageX;
 			coords[1] = e.pageY;
-
-            coords[2] = e.clientX;
-            coords[3] = e.clientY;
 		}
 		return coords;
 	}
@@ -537,8 +531,8 @@ $.fn.zoomify = function(data, opt) {
             var abs = event_coords(event);
 
 			self.trigger('info', {
-                absX: abs[2],
-                absY: abs[3],
+                absX: abs[0],
+                absY: abs[1],
                 relX: cx,
                 relY: cy,
                 data: data
