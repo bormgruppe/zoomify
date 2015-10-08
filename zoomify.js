@@ -9,7 +9,7 @@
 /*global window, document, setTimeout, getComputedStyle */
 /*jslint white: true */
 
-$.fn.zoomify = function(data, opt) {
+$.fn.zoomify = function(opt) {
 	"use strict";
 	
 	function relMouseCoords(event){
@@ -278,7 +278,7 @@ $.fn.zoomify = function(data, opt) {
             var cx = clickCoords.x * img_orig_width / img_zoom_width;
             var cy = clickCoords.y * img_orig_height / img_zoom_height;
 
-            $(img_ref).trigger('open', { x: cx, y: cy, data: data });
+            $(img_ref).trigger('zoomify-click', { x: cx, y: cy });
         }
 
         started = false;
@@ -530,12 +530,11 @@ $.fn.zoomify = function(data, opt) {
 
             var abs = event_coords(event);
 
-			self.trigger('info', {
+            self.trigger('zoomify-mousemove', {
                 absX: abs[0],
                 absY: abs[1],
                 relX: cx,
-                relY: cy,
-                data: data
+                relY: cy
             });
 		});
 	}
