@@ -1,0 +1,26 @@
+{
+  "name": "bormgruppe-zoomify",
+  "version": "1.0.0",
+  "description": "Fork of zoomify library to adapt to the special needs of Borm Applications",
+  "main": "zoomify.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://igin@github.com/bormgruppe/zoomify.git"
+  },
+  "keywords": [
+    "zoomify"
+  ],
+  "author": "bormgruppe",
+  "license": "SEE LICENSE IN readme.md",
+  "bugs": {
+    "url": "https://github.com/bormgruppe/zoomify/issues"
+  },
+  "homepage": "https://github.com/bormgruppe/zoomify",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-webserver": "^0.9.1"
+  }
+}

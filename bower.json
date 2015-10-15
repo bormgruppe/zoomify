@@ -1,0 +1,25 @@
+{
+  "name": "bormgruppe-zoomify",
+  "main": "zoomify.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/bormgruppe/zoomify",
+  "authors": [
+    "bormgruppe"
+  ],
+  "description": "Fork of the zoomify library adapted for specific needs of Borm applications",
+  "moduleType": [],
+  "keywords": [
+    "zoomify"
+  ],
+  "license": "SEE LICENSE IN readme.md",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4"
+  }
+}
