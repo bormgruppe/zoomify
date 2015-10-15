@@ -1,66 +1,66 @@
-	.image-zoom-wrapper {
-		position: relative;
-		text-align: left;
-		width: 800px;
-		height: 400px;
-		overflow: auto;
-		margin: 10px auto;
-		border: 1px solid #000;
-		background: #AAA url("icon/loader.gif") no-repeat 50% 50%;
-		-moz-user-select: none;
-		-khtml-user-select: none;
-		-webkit-user-select: none;
-		user-select: none;
-	}
+.image-zoom-wrapper {
+    position: relative;
+    text-align: left;
+    width: 800px;
+    height: 400px;
+    overflow: auto;
+    margin: 10px auto;
+    border: 1px solid #000;
+    background: #AAA url("icon/loader.gif") no-repeat 50% 50%;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
 
-	.image-zoom-wrapper.js-active {
-		background-image: none;
-	}
+.image-zoom-wrapper.js-active {
+    background-image: none;
+}
 
-	.js-enabled .image-zoom-wrapper {
-		overflow: hidden;
-		position: relative;
-	}
+.js-enabled .image-zoom-wrapper {
+    overflow: hidden;
+    position: relative;
+}
 
-	.js-enabled .image-zoom-wrapper .image-zoom {
-		visibility: hidden;
-		position: relative;
-	}
+.js-enabled .image-zoom-wrapper .image-zoom {
+    visibility: hidden;
+    position: relative;
+}
 
-	.image-zoom-wrapper div.zoom-control {
-		width: 26px;
-		height: 26px;
-	}
+.image-zoom-wrapper div.zoom-control {
+    width: 26px;
+    height: 26px;
+}
 
-	.image-zoom-wrapper div.zoom-in,
-	.image-zoom-wrapper div.zoom-out {
-		background: url("icon/zoom-in.png") no-repeat 0 0;
-		position: absolute;
-		left: 10px;
-		top: 10px;
-	}
+.image-zoom-wrapper div.zoom-in,
+.image-zoom-wrapper div.zoom-out {
+    background: url("icon/zoom-in.png") no-repeat 0 0;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
 
-	.image-zoom-wrapper div.zoom-out {
-		background-image: url("icon/zoom-out.png");
-		top: 46px;
-	}
+.image-zoom-wrapper div.zoom-out {
+    background-image: url("icon/zoom-out.png");
+    top: 46px;
+}
 
-	.image-zoom-wrapper div.zoom-off {
-		background-position: 0 100%;
-	}
+.image-zoom-wrapper div.zoom-off {
+    background-position: 0 100%;
+}
 
-	@media(max-device-width: 480px) {
+@media(max-device-width: 480px) {
 
-		.image-zoom-wrapper div.zoom-in,
-		.image-zoom-wrapper div.zoom-out {
-			background-size: 100%;
-			width: 52px;
-			height: 52px;
-		}
+    .image-zoom-wrapper div.zoom-in,
+    .image-zoom-wrapper div.zoom-out {
+        background-size: 100%;
+        width: 52px;
+        height: 52px;
+    }
 
-		.image-zoom-wrapper div.zoom-out {
-			left: auto;
-			right: 10px;
-			top: 10px;
-		}
-	}
+    .image-zoom-wrapper div.zoom-out {
+        left: auto;
+        right: 10px;
+        top: 10px;
+    }
+}
