@@ -474,9 +474,9 @@ $.fn.zoomify = function(opt) {
         zoom_level_count = (zoom_levels.length - 1);
         image_zoom(Math.round(zoom_level_count / 2));
         if (opt && opt.hasOwnProperty('startZoom')) {
-            if (opt.startZoom == 'min') {
+            if (opt.startZoom === 'min') {
                 image_zoom(0); //zoomed in
-            } else if (opt.startZoom == 'max') {
+            } else if (opt.startZoom === 'max') {
                 image_zoom(zoom_level_count);  //zoomed out
             }
         }
