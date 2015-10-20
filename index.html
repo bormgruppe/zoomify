@@ -19,8 +19,8 @@
 	</div>
 
 	<script type="text/javascript">
-        $(document).ready(function(){
-            $('.image-zoom-wrapper').zoomify();
+        $('.image-zoom').load(function(){
+            $(this).parent().zoomify();
         });
     </script>
 
