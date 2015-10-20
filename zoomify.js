@@ -190,8 +190,8 @@ $.fn.zoomify = function(opt) {
         var max_left, max_top;
 
         var border = 50;
-        if (opt && opt['border']) {
-            border = opt['border'];
+        if (opt && opt.hasOwnProperty('border')) {
+            border = opt.border;
         }
 
         if (img_zoom_width > div_width) {
@@ -473,10 +473,10 @@ $.fn.zoomify = function(opt) {
 
         zoom_level_count = (zoom_levels.length - 1);
         image_zoom(Math.round(zoom_level_count / 2));
-        if (opt && opt['startZoom']) {
-            if (opt['startZoom'] == 'min') {
+        if (opt && opt.hasOwnProperty('startZoom')) {
+            if (opt.startZoom == 'min') {
                 image_zoom(0); //zoomed in
-            } else if (opt['startZoom'] == 'max') {
+            } else if (opt.startZoom == 'max') {
                 image_zoom(zoom_level_count);  //zoomed out
             }
         }
