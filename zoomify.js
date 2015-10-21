@@ -324,7 +324,7 @@ $.fn.zoomify = function(opt) {
         if (e.type === 'touchstart') {
             img_ref.onmousedown = null;
             img_ref.ontouchmove = image_move_event;
-            img_ref.ontouchend = function() {
+            img_ref.ontouchend = function(e) {
                 image_click_event(e);
 
                 img_ref.ontouchmove = null;
