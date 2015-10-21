@@ -1,9 +1,23 @@
 var gulp = require('gulp');
-var webserver = require('gulp-webserver');
+var gutil = require('gulp-util');
+
+// used to serve the example
+var connect = require('connect');
+var static = require('serve-static');
+var open = require('open');
+
+// Serve dir at port and open the browser at path (relative to dir)
+var serveAndOpen = function(dir, port, path) {
+    connect()
+        .use(static(dir))
+        .listen(port, function() {
+            gutil.log('Starting webserver on port ' + port);
+            var openPath = 'http://localhost:' + port + '/' + path;
+            gutil.log('Opening browser at ' + openPath);
+            open(openPath);
+        });
+};
 
 gulp.task('serve-example', function(){
-    return gulp.src('./')
-        .pipe(webserver({
-            open: 'index.html'
-        }));
+    serveAndOpen('./', 8000, 'index.html');
 });
