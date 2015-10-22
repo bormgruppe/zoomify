@@ -22,10 +22,8 @@
   "homepage": "https://github.com/bormgruppe/zoomify",
   "devDependencies": {
     "bower": "^1.6.3",
-    "connect": "^3.4.0",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.7",
-    "open": "0.0.5",
-    "serve-static": "^1.10.0"
+    "web-serve": "git://github.com/bormgruppe/web-serve.git"
   }
 }
