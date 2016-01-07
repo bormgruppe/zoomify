@@ -23,6 +23,7 @@
         "gulpfile.js"
     ],
     "dependencies": {
-        "jquery": "~2.1.4"
+        "jquery": "~2.1.4",
+        "hammerjs": "~2.0.6"
     }
 }

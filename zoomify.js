@@ -44,9 +44,10 @@ $.fn.zoomify = function(opt) {
         zoom_level = 0,
         zoom_levels = [],
         zoom_level_count = [],
-        click_last = 0,
         origin = null,
-        html_ref = null;
+        html_ref = null,
+		is_pinching = false,
+		last_pinch_distance = null;
 
     //--------------------------------------------------
     // IE9 Bug ... if loading an iframe which is then
@@ -248,12 +249,14 @@ $.fn.zoomify = function(opt) {
 
         e = e || window.event;
 
-        var currentPos = event_coords(e);
+        if (!is_pinching) {
+            var currentPos = event_coords(e);
 
-        img_current_left = (img_start_left + (currentPos[0] - origin[0]));
-        img_current_top = (img_start_top + (currentPos[1] - origin[1]));
+            img_current_left = (img_start_left + (currentPos[0] - origin[0]));
+            img_current_top = (img_start_top + (currentPos[1] - origin[1]));
 
-        image_move_update();
+            image_move_update();
+        }
 
         //--------------------------------------------------
         // Prevent default
@@ -303,16 +306,6 @@ $.fn.zoomify = function(opt) {
             e.preventDefault();
         } else {
             e.returnValue = false; // IE: http://stackoverflow.com/questions/1000597/
-        }
-
-        //--------------------------------------------------
-        // Double tap/click event
-
-        var now = new Date().getTime();
-        if (click_last > (now - 200)) {
-            image_zoom_in();
-        } else {
-            click_last = now;
         }
 
         //--------------------------------------------------
@@ -536,6 +529,45 @@ $.fn.zoomify = function(opt) {
                 relX: cx,
                 relY: cy
             });
+        });
+		
+        var hammertime = new Hammer(img_ref);
+        hammertime.get('pinch').set({ enable: true });
+		
+        hammertime.on('pinchstart pinchend', function(event) {
+			switch (event.type) {
+				case 'pinchstart':
+					is_pinching = true;
+					last_pinch_distance = event.distance;
+					
+					break;
+				case 'pinchend':
+					is_pinching = false;
+					last_pinch_distance = null;
+				default:
+					break;
+			}
+        });
+
+        hammertime.on('pinchin pinchout', function(event) {
+            var newDistance = event.distance;
+
+			if (Math.abs(last_pinch_distance - newDistance) > 10) { // zoom threshold
+				switch (event.type) {
+					case 'pinchin':
+						image_zoom_out();
+
+						break;
+					case 'pinchout':
+						image_zoom_in();
+
+						break;
+					default:
+					   break;
+				}
+
+				last_pinch_distance = newDistance;
+			}
         });
     }
 };
