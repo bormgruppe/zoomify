@@ -46,7 +46,6 @@ $.fn.zoomify = function(opt) {
         zoom_level_count = [],
         origin = null,
         html_ref = null,
-		is_pinching = false,
 		last_pinch_distance = null;
 
     //--------------------------------------------------
@@ -249,7 +248,7 @@ $.fn.zoomify = function(opt) {
 
         e = e || window.event;
 
-        if (!is_pinching) {
+        if (last_pinch_distance === null) {
             var currentPos = event_coords(e);
 
             img_current_left = (img_start_left + (currentPos[0] - origin[0]));
@@ -537,13 +536,13 @@ $.fn.zoomify = function(opt) {
         hammertime.on('pinchstart pinchend', function(event) {
 			switch (event.type) {
 				case 'pinchstart':
-					is_pinching = true;
 					last_pinch_distance = event.distance;
 					
 					break;
 				case 'pinchend':
-					is_pinching = false;
 					last_pinch_distance = null;
+					
+					break;
 				default:
 					break;
 			}
