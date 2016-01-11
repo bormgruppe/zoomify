@@ -481,7 +481,7 @@ $.fn.zoomify = function(opt) {
         div_ref.className = div_ref.className + ' js-active';
 
         //--------------------------------------------------
-        // Add events
+        // Add mouse events
 
         var startX;
         var startY;
@@ -530,43 +530,40 @@ $.fn.zoomify = function(opt) {
             });
         });
 		
+        //--------------------------------------------------
+        // Add Hammer.js events
+		
         var hammertime = new Hammer(img_ref);
         hammertime.get('pinch').set({ enable: true });
 		
-        hammertime.on('pinchstart pinchend', function(event) {
-			switch (event.type) {
-				case 'pinchstart':
-					last_pinch_distance = event.distance;
-					
-					break;
-				case 'pinchend':
-					last_pinch_distance = null;
-					
-					break;
-				default:
-					break;
-			}
-        });
-
-        hammertime.on('pinchin pinchout', function(event) {
-            var newDistance = event.distance;
-
+		hammertime.on('pinchstart', function(event) {
+			last_pinch_distance = event.distance;
+		});
+		
+		hammertime.on('pinchend', function(event) {
+			last_pinch_distance = null;
+		});
+		
+		var ifPinchCallback = function(event, callback) {
+			var newDistance = event.distance;
+			
 			if (Math.abs(last_pinch_distance - newDistance) > 10) { // zoom threshold
-				switch (event.type) {
-					case 'pinchin':
-						image_zoom_out();
-
-						break;
-					case 'pinchout':
-						image_zoom_in();
-
-						break;
-					default:
-					   break;
-				}
-
+				callback(event);
+				
 				last_pinch_distance = newDistance;
 			}
-        });
+		};
+		
+		hammertime.on('pinchin', function(event) {
+			ifPinchCallback(event, function(event) {
+				image_zoom_out();
+			});
+		});
+		
+		hammertime.on('pinchout', function(event) {
+			ifPinchCallback(event, function(event) {
+				image_zoom_in();
+			});
+		});
     }
 };
