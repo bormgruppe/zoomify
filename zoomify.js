@@ -79,10 +79,9 @@ $.fn.zoomify = function(opt) {
 
         if (new_zoom >= zoom_level_count) {
             if (new_zoom > zoom_level_count) {
-                div_ref.style.opacity = 0.5;
-                setTimeout(function() {div_ref.style.opacity = 1;}, 150);
                 return;
             }
+			
             zoom_control_refs['in-on'].style.display = 'none';
             zoom_control_refs['in-off'].style.display = 'block';
         } else {
@@ -92,10 +91,9 @@ $.fn.zoomify = function(opt) {
 
         if (new_zoom <= 0) {
             if (new_zoom < 0) {
-                div_ref.style.opacity = 0.5;
-                setTimeout(function() {div_ref.style.opacity = 1;}, 150);
                 return;
             }
+			
             zoom_control_refs['out-on'].style.display = 'none';
             zoom_control_refs['out-off'].style.display = 'block';
         } else {
