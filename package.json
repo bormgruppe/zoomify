@@ -2,7 +2,7 @@
   "name": "bormgruppe-zoomify",
   "version": "1.0.0",
   "description": "Fork of zoomify library to adapt to the special needs of Borm Applications",
-  "main": "zoomify.js",
+  "main": "zoomify-es6.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp serve-example"
