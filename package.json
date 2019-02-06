@@ -5,7 +5,7 @@
   "main": "zoomify.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "bower install && gulp serve-example"
+    "start": "gulp serve-example"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,12 @@
   },
   "homepage": "https://github.com/bormgruppe/zoomify",
   "devDependencies": {
-    "bower": "^1.6.3",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.7",
     "web-serve": "git://github.com/bormgruppe/web-serve.git"
+  },
+  "dependencies": {
+    "hammerjs": "^2.0.8",
+    "jquery": "^3.3.1"
   }
 }

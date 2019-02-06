@@ -8,8 +8,8 @@
 	<meta http-equiv="imagetoolbar" content="no" />
 
 	<link rel="stylesheet" type="text/css" href="./zoomify.css" media="all" />
-    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="./bower_components/hammerjs/hammer.js"></script>
+    <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="./node_modules/hammerjs/hammer.min.js"></script>
     <script type="text/javascript" src="./zoomify.js"></script>
 
 </head>
@@ -20,7 +20,7 @@
 	</div>
 
 	<script type="text/javascript">
-        $('.image-zoom').load(function(){
+        $('.image-zoom').on('load', function(){
             $(this).parent().zoomify();
         });
     </script>
